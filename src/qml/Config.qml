@@ -1,9 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.0
-import KamosoQtGStreamer 1.0
 import org.kde.kamoso 3.0
 import org.kde.kirigami 2.0 as Kirigami
+import VideoElement 1.0
 
 GridView {
     id: view
@@ -62,7 +62,7 @@ GridView {
         width: Math.floor(view.width / columnCount) - Kirigami.Units.smallSpacing
         height: width * 3/4
 
-        color: Kirigami.Theme.textColor
+        color: "black"
 
         MouseArea {
             anchors.centerIn: parent
@@ -70,9 +70,11 @@ GridView {
             width:  delegateItem.width - (borderWidth * 2)
             height: delegateItem.height - (borderWidth * 2)
 
-            VideoItem {
+            VideoElement {
                 anchors.fill: parent
-
+                //"/tmp/lenna.jpg"
+                description: "filesrc location=\"" + view.sampleImage + "\" ! decodebin ! imagefreeze ! videoconvert ! " + model.filters + " name=last"
+                /*
                 PipelineItem {
                     id: pipe
 
@@ -81,10 +83,9 @@ GridView {
                         delegateItem.visible = false
                         view.model.remove(index)
                     }
-
-                    description: "filesrc location=\"" + view.sampleImage + "\" ! decodebin ! imagefreeze ! videoconvert ! " + model.filters + " name=last"
                 }
                 surface: pipe.surface
+                */
             }
 
             onClicked: {

@@ -1,5 +1,3 @@
-add_subdirectory(elements)
-
 add_definitions(-DGST_DISABLE_DEPRECATED)
 add_definitions(-fexceptions)
 add_definitions(-DQT_NO_KEYWORDS)
@@ -12,16 +10,15 @@ ecm_setup_version(${KDE_APPLICATIONS_VERSION} VARIABLE_PREFIX KAMOSO VERSION_HEA
 add_executable(kamoso
     devicemanager.cpp
     device.cpp
-    whitewidgetmanager.cpp 
+    whitewidgetmanager.cpp
     whitewidget.cpp
     kamosodirmodel.cpp
     main.cpp
     kamoso.cpp
     previewfetcher.cpp
+    video/gstpipelineplayer.cpp
+    video/videoelement.cpp
     video/webcamcontrol.cpp
-
-    QGst/Quick/videosurface.cpp
-    QGst/Quick/videoitem.cpp
 
     ${kamosoqml_SRCS}
 )

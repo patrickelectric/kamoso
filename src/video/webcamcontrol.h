@@ -21,15 +21,16 @@
 #define WEBCAMCONTROL_H
 
 #include <QObject>
+#include <QSharedPointer>
 #include <QUrl>
 
-#include "gstpointer.h"
 #include <gst/gstpipeline.h>
 #include <gst/gstmessage.h>
 
-namespace QGst { namespace Quick { class VideoSurface; } }
+//namespace QGst { namespace Quick { class VideoSurface; } }
 
 class Device;
+class QQmlApplicationEngine;
 class WebcamControl : public QObject
 {
     Q_OBJECT
@@ -67,14 +68,23 @@ class WebcamControl : public QObject
         void updateSourceFilter();
         void setVideoSettings();
 
+        /**
+         * @brief GstElement deleter
+         *
+         */
+        static void gstElementDeleter(GstElement* element);
+        static void gstPipelineDeleter(GstPipeline* element);
+
+        void gstPipelinePlayer();
+
         QString m_extraFilters;
         QString m_tmpVideoPath;
         QString m_currentDevice;
-        GstPointer<GstPipeline> m_pipeline;
-        GstPointer<GstElement> m_cameraSource;
-        QGst::Quick::VideoSurface* m_surface = nullptr;
+        QSharedPointer<GstPipeline> m_pipeline;
+        QSharedPointer<GstElement> m_cameraSource;
         bool m_emitTaken = true;
         bool m_mirror = true;
+        QQmlApplicationEngine* m_engine;
 };
 
 #endif // WEBCAMCONTROL_H

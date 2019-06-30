@@ -103,7 +103,7 @@ void Kamoso::setRecording(bool recording)
         KJob *job = KIO::move(QUrl::fromLocalFile(m_webcamControl->stopRecording()), path);
         job->start();
 
-        m_webcamControl->playDevice(DeviceManager::self()->playingDevice());
+        //m_webcamControl->playDevice(DeviceManager::self()->playingDevice());
         m_recordingTimer.stop();
     }
 

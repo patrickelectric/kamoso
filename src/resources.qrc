@@ -8,5 +8,6 @@
     <file>qml/White.qml</file>
     <file>qml/Mode.qml</file>
     <file>qml/ImageThumbnail.qml</file>
+    <file>qml/GstVideo.qml</file>
  </qresource>
 </RCC>
